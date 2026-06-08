@@ -1,10 +1,4 @@
 import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Browse Images",
-  description: "Search and download thousands of free authentic African images.",
-};
-
 import { Suspense } from "react";
 import { MOCK_ASSETS } from "@/lib/mock-data";
 import { supabase } from "@/lib/supabase";
@@ -12,6 +6,11 @@ import AssetCard from "@/components/ui/AssetCard";
 import SearchBar from "@/components/ui/SearchBar";
 import FilterBar from "@/components/ui/FilterBar";
 import { Asset, Region, AssetType } from "@/types";
+
+export const metadata: Metadata = {
+  title: "Browse Images",
+  description: "Search and download thousands of free authentic African images.",
+};
 
 interface Props {
   searchParams: Promise<{ q?: string; region?: string; type?: string }>;
@@ -35,7 +34,6 @@ async function getAssets(q?: string, region?: string, type?: string): Promise<As
 
     const { data, error } = await query;
 
-    // If no data yet, fall back to mock data
     if (error || !data || data.length === 0) {
       return filterMock(q, region, type);
     }
@@ -65,7 +63,6 @@ export default async function BrowsePage({ searchParams }: Props) {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-      {/* Header */}
       <div className="mb-8">
         <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold text-[#2C1A0E] mb-2">
           {q ? `Results for "${q}"` : "Browse Images"}
@@ -75,7 +72,6 @@ export default async function BrowsePage({ searchParams }: Props) {
         </p>
       </div>
 
-      {/* Search */}
       <Suspense>
         <div className="mb-6">
           <SearchBar />
@@ -85,7 +81,6 @@ export default async function BrowsePage({ searchParams }: Props) {
         </div>
       </Suspense>
 
-      {/* Grid */}
       {assets.length > 0 ? (
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-5">
           {assets.map((asset) => (
