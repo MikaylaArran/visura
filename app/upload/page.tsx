@@ -1,10 +1,3 @@
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Contribute",
-  description: "Upload your African photography and share it with the world.",
-};
-
 "use client";
 import { useState, useRef } from "react";
 import { Upload, ImagePlus, X, CheckCircle, ChevronDown } from "lucide-react";
@@ -83,7 +76,6 @@ export default function UploadPage() {
     setLoading(true);
 
     try {
-      // 1. Upload file to Supabase Storage
       const ext = file!.name.split(".").pop();
       const filePath = `uploads/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
 
@@ -93,19 +85,16 @@ export default function UploadPage() {
 
       if (uploadError) throw uploadError;
 
-      // 2. Get public URL
       const { data: { publicUrl } } = supabase.storage
         .from("assets")
         .getPublicUrl(filePath);
 
-      // 3. Get image dimensions
       const dimensions = await new Promise<{ width: number; height: number }>((resolve) => {
         const img = new window.Image();
         img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
         img.src = preview!;
       });
 
-      // 4. Save metadata to database
       const { error: dbError } = await supabase.from("assets").insert({
         title: form.title.trim(),
         description: form.description.trim(),
@@ -119,7 +108,7 @@ export default function UploadPage() {
         width: dimensions.width,
         height: dimensions.height,
         downloads: 0,
-        is_approved: true, // auto-approve for now
+        is_approved: true,
       });
 
       if (dbError) throw dbError;
@@ -178,9 +167,7 @@ export default function UploadPage() {
         <h1 className="font-[family-name:var(--font-display)] text-3xl font-bold text-[#2C1A0E]">
           Contribute to AfriStock
         </h1>
-        <p className="text-[#7A6050] mt-2">
-          Share your vision with the world.
-        </p>
+        <p className="text-[#7A6050] mt-2">Share your vision with the world.</p>
       </div>
 
       {error && (
@@ -190,7 +177,6 @@ export default function UploadPage() {
       )}
 
       <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-5 gap-8">
-        {/* File drop zone */}
         <div className="lg:col-span-2">
           <div
             onDrop={onDrop}
@@ -234,7 +220,6 @@ export default function UploadPage() {
           />
         </div>
 
-        {/* Form fields */}
         <div className="lg:col-span-3 flex flex-col gap-5">
           <div>
             <label className="block text-sm font-medium text-[#2C1A0E] mb-1.5">Title *</label>
