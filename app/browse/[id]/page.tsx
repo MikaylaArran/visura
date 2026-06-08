@@ -160,7 +160,7 @@ export default async function AssetDetailPage({ params }: Props) {
           </Link>
 
           {/* Free download */}
-          <div className="mt-auto">
+          <div className="mt-auto pt-4 border-t border-[#E2D8C8]">
             <div className="flex items-baseline gap-2 mb-4">
               <span className="text-3xl font-bold text-[#2C1A0E] font-[family-name:var(--font-display)]">
                 Free
