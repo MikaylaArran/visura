@@ -12,7 +12,7 @@ export const MOCK_ASSETS: Asset[] = [
     type: "photo",
     license: "standard",
     price: 0,
-    previewUrl: "https://images.unsplash.com/photo-1580746738099-f1b9b7a2c1e5?w=600&q=80",
+   previewUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
     contributorId: "c1",
     contributorName: "Adaeze Okafor",
     width: 4000,
