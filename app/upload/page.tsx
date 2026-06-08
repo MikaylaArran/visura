@@ -10,6 +10,7 @@ const REGIONS = [
   { value: "southern-africa", label: "Southern Africa" },
   { value: "north-africa", label: "North Africa" },
   { value: "central-africa", label: "Central Africa" },
+  { value: "india", label: "India" },
 ];
 
 const ASSET_TYPES = [

@@ -445,7 +445,7 @@ export const REGIONS = [
   { value: "southern-africa", label: "Southern Africa" },
   { value: "north-africa", label: "North Africa" },
   { value: "central-africa", label: "Central Africa" },
-  { value: "india", label: "🇮🇳 India" },
+  { value: "india", label: "India" },
 ] as const;
 
 export const ASSET_TYPES = [
